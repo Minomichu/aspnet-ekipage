@@ -1,0 +1,53 @@
+@model IEnumerable<ekipage.Models.Rider>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RiderName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Preference)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Horse.HorseTemper)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Horse)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RiderName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preference)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Horse.HorseTemper)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Horse.HorseName)
+</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RiderId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.RiderId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.RiderId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

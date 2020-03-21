@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ekipage.Models.Rider>
+
+    <div class="dagensGrupp">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RiderName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Horse)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <!--
+    <tbody>
+        Aforeach (var item in Model)
+        {
+            <tr>
+                <td>
+                    AHtml.DisplayFor(modelItem => item.RiderName)
+                </td>
+                <td>
+                    AHtml.DisplayFor(modelItem => item.Horse.HorseName)
+                </td>
+            </tr>
+        }
+    </tbody>
+        -->
+        </table>
+
+    </div>

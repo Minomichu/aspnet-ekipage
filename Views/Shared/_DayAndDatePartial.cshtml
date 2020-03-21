@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ekipage.Models.DateForLesson>
+
+<div class="testLektionstyp">
+    <div class="text-center">
+
+        <h2>###Datum###</h2>
+        <p>Måndag 18:00</p>
+        <p>@Html.DisplayNameFor(model => model.LessonContent): ###lektionstyp###</p>
+
+    </div>
+</div>
+
+<!--
+FUNKAR INTE :/
+(nullvärde)
+
+Amodel ekipage.Models.DateForLesson
+    <div class="testLektionstyp">
+        <h2>Testutskrift</h2>
+        <p>
+            Datum: AModel.Date <br />
+            Lektionstyp: AModel.LessonContent
+        </p>
+    </div>
+
+***
+
+(nullvärde)
+Amodel IEnumerable<ekipage.Models.LessonContent>
+Aforeach (var item in Model)
+    {
+        AHtml.DisplayFor(modelItem => item.Lesson)
+    }
+
+-->

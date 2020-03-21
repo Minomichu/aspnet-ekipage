@@ -1,0 +1,42 @@
+@model ekipage.Models.Rider
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Rider</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RiderName" class="control-label"></label>
+                <input asp-for="RiderName" class="form-control" />
+                <span asp-validation-for="RiderName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Preference" class="control-label"></label>
+                <input asp-for="Preference" class="form-control" />
+                <span asp-validation-for="Preference" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HorseId" class="control-label"></label>
+                <select asp-for="HorseId" class ="form-control" asp-items="ViewBag.HorseId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
