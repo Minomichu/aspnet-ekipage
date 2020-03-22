@@ -1,12 +1,12 @@
 @model ekipage.Models.Rider
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Lägg till ryttare";
 }
 
-<h1>Create</h1>
+<h1>Lägg till</h1>
 
-<h4>Rider</h4>
+<h2>Ny ryttare i gruppen</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -22,19 +22,21 @@
                 <input asp-for="Preference" class="form-control" />
                 <span asp-validation-for="Preference" class="text-danger"></span>
             </div>
+          
+        <div class="form-group">
+            <label asp-for="HorseId" class="control-label">Häst</label>
+            <select asp-for="HorseId" class="form-control" asp-items="ViewBag.HorseId"></select>
+        </div>
+                
             <div class="form-group">
-                <label asp-for="HorseId" class="control-label"></label>
-                <select asp-for="HorseId" class ="form-control" asp-items="ViewBag.HorseId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Lägg till" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Gå tillbaka</a>
 </div>
 
 @section Scripts {

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ekipage.Data;
 using ekipage.Models;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ekipage.Controllers
 {
@@ -22,11 +24,33 @@ namespace ekipage.Controllers
         // GET: DateForLesson
         public async Task<IActionResult> Index()
         {
+
+            var hest = _context.Rider
+                .FromSqlRaw("SELECT * FROM Rider") //INNER JOIN Horse ON Rider.HorseId = Horse.HorseId")
+                .ToList();
+
+            ViewBag.text = hest;
+            
+            /*
+            var hest = (from h in _context.Horse
+                        select h).ToList();
+
+            ViewBag.text = hest;
+            */
+
+            /*
+            IQueryable<Horse> Hest =
+                from hejhej in _context.Horse select hejhej;
+
+            ViewBag.text = Hest.ToList();
+            */
+
             var applicationDbContext = _context.DateForLesson.Include(d => d.LessonContent);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: DateForLesson/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,6 +70,7 @@ namespace ekipage.Controllers
         }
 
         // GET: DateForLesson/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["LessonContentId"] = new SelectList(_context.LessonContent, "LessonContentId", "Lesson");
@@ -70,6 +95,7 @@ namespace ekipage.Controllers
         }
 
         // GET: DateForLesson/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -91,6 +117,7 @@ namespace ekipage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("DateForLessonId,Date,LessonContentId")] DateForLesson dateForLesson)
         {
             if (id != dateForLesson.DateForLessonId)
@@ -123,6 +150,7 @@ namespace ekipage.Controllers
         }
 
         // GET: DateForLesson/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,6 +172,7 @@ namespace ekipage.Controllers
         // POST: DateForLesson/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var dateForLesson = await _context.DateForLesson.FindAsync(id);

@@ -1,12 +1,12 @@
 @model ekipage.Models.DateForLesson
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Byt datum";
 }
 
-<h1>Edit</h1>
+<h1>Nästa lektion</h1>
 
-<h4>DateForLesson</h4>
+<h2>Kommande datum och lektionsinnehåll</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,19 +19,19 @@
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LessonContentId" class="control-label"></label>
+                <label asp-for="LessonContentId" class="control-label">Typ av lektion:</label>
                 <select asp-for="LessonContentId" class="form-control" asp-items="ViewBag.LessonContentId"></select>
                 <span asp-validation-for="LessonContentId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Spara" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Gå tillbaka</a>
 </div>
 
 @section Scripts {

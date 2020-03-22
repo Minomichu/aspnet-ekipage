@@ -62,7 +62,7 @@ namespace ekipage
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Rider}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

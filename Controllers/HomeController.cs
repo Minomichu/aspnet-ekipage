@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ekipage.Models;
+using Microsoft.EntityFrameworkCore;
+using ekipage.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ekipage.Controllers
 {
@@ -18,14 +21,13 @@ namespace ekipage.Controllers
             _logger = logger;
         }
 
-
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
 
         
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -13,7 +13,7 @@ namespace ekipage.Models
         [Display(Name = "Ryttare")]
         public string RiderName { get; set; }
 
-        [Display(Name = "Ej häst som är:")]
+        [Display(Name = "Ej hästhumör:")]
         public string Preference { get; set; }
 
         //FK - kopplar ihop med modellen

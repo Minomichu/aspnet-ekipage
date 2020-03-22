@@ -14,7 +14,7 @@ namespace ekipage.Models
         [Display(Name = "Häst")]
         public string HorseName { get; set; }
 
-        [Display(Name = "Humör")]
+        [Display(Name = "Hästhumör")]
         public string HorseTemper { get; set; }
 
         [Display(Name = "Om hästen")]

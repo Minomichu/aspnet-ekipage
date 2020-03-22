@@ -1,26 +1,60 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
 @model IEnumerable<ekipage.Models.Rider>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Startsida";
 }
 
-<h1>Index</h1>
+    <div class="text-center">
+        <h1 class="display-4">Måndagsgruppen</h1>
+        <div class="smallSeparator"></div>
+        <p>
+            Här ser du vilken häst du ska rida.<br />
+            <a asp-controller="DateForLesson" asp-action="Index">Här ser du vilket datum listan gäller för samt lektionsinnehåll!</a><br />
+            Listan uppdateras/ hästarna delas ut kl 12:00 samma dag som lektionen äger rum.
+        </p>
+    </div>
+    <div class="separator"></div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+<!--
+A{ IEnumerable<ekipage.Models.DateForLesson> validDate = (IEnumerable<ekipage.Models.DateForLesson>)ViewBag.dateInfo;
+        }
+
+    Aforeach (ekipage.Models.DateForLesson person in validDate)
+
+    {
+        <p>Aperson.Date</p>
+
+    }
+    -->
+
+
+
 <table class="table">
     <thead>
         <tr>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <th>
+                    <a class="text-danger">Radera ryttare</a>
+                </th>
+            }
             <th>
                 @Html.DisplayNameFor(model => model.RiderName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Preference)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Horse.HorseTemper)
-            </th>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Preference)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Horse.HorseTemper)
+                </th>
+            }
             <th>
                 @Html.DisplayNameFor(model => model.Horse)
             </th>
@@ -28,26 +62,47 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <td>
+                    <a class="text-danger" asp-action="Delete" asp-route-id="@item.RiderId">Radera ***</a>
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.RiderName)
             </td>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Preference)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Horse.HorseTemper)
+                </td>
+            }
             <td>
-                @Html.DisplayFor(modelItem => item.Preference)
+                <a asp-action="Details" asp-route-id="@item.RiderId">@Html.DisplayFor(modelItem => item.Horse.HorseName)</a>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Horse.HorseTemper)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Horse.HorseName)
-</td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.RiderId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RiderId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RiderId">Delete</a>
-            </td>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.RiderId">Byt häst</a>
+
+                </td>
+            }
         </tr>
-}
+        }
     </tbody>
 </table>
+@if (SignInManager.IsSignedIn(User))
+{
+    <p>
+        <a asp-action="Create">Lägg till ryttare</a>
+    </p>
+}
+
+<partial name="_CafePartial" />
+<div class="cafePartial"></div>

@@ -72,3 +72,21 @@ body {
 .testLektionstyp {
     margin: 30px 0;
 }
+
+.alignText {
+    text-align: left;
+    display: inline-block;
+    border: 2px solid #47a447;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+.separator {
+    height: 30px;
+}
+
+.smallSeparator {
+    height: 15px;
+}
+    

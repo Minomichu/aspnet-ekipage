@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ekipage.Data;
 using ekipage.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ekipage.Controllers
 {
@@ -22,6 +23,12 @@ namespace ekipage.Controllers
         // GET: Rider
         public async Task<IActionResult> Index()
         {
+            var validDate = _context.DateForLesson
+                .FromSqlRaw("SELECT * FROM DateForLesson")
+                .ToList();
+
+            ViewBag.dateInfo = validDate;
+
             var applicationDbContext = _context.Rider.Include(r => r.Horse);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -46,6 +53,7 @@ namespace ekipage.Controllers
         }
 
         // GET: Rider/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["HorseId"] = new SelectList(_context.Horse, "HorseId", "HorseName");
@@ -57,6 +65,7 @@ namespace ekipage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("RiderId,RiderName,Preference,HorseId")] Rider rider)
         {
             if (ModelState.IsValid)
@@ -70,6 +79,7 @@ namespace ekipage.Controllers
         }
 
         // GET: Rider/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -91,6 +101,7 @@ namespace ekipage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("RiderId,RiderName,Preference,HorseId")] Rider rider)
         {
             if (id != rider.RiderId)
@@ -123,6 +134,7 @@ namespace ekipage.Controllers
         }
 
         // GET: Rider/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,6 +156,7 @@ namespace ekipage.Controllers
         // POST: Rider/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var rider = await _context.Rider.FindAsync(id);

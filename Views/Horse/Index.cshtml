@@ -4,11 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
+<h1>Ridskolans hästar</h1>
+<!--
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+    -->
+<p class="text-info">Förändringar i hästlistan kan endast genomföras av ridksolechefen</p>
 <table class="table">
     <thead>
         <tr>
@@ -25,23 +27,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
-                <a asp-action="Details" asp-route-id="@item.HorseId">@Html.DisplayFor(modelItem => item.HorseName)</a>
-</td>
+                @Html.DisplayFor(modelItem => item.HorseName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HorseTemper)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HorseDescription)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.HorseId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.HorseId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.HorseId">Delete</a>
-            </td>
+            <th></th>
+            <!--
+        <td>
+            <a asp-action="Edit" asp-route-id="Aitem.HorseId">Edit</a> |
+            <a asp-action="Details" asp-route-id="Aitem.HorseId">Details</a> |
+            <a asp-action="Delete" asp-route-id="Aitem.HorseId">Delete</a>
+        </td>
+    -->
         </tr>
-}
+        }
     </tbody>
 </table>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ekipage.Data;
 using ekipage.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ekipage.Controllers
 {
@@ -20,12 +21,14 @@ namespace ekipage.Controllers
         }
 
         // GET: Horse
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Horse.ToListAsync());
         }
 
         // GET: Horse/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +47,7 @@ namespace ekipage.Controllers
         }
 
         // GET: Horse/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +58,7 @@ namespace ekipage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("HorseId,HorseName,HorseTemper,HorseDescription")] Horse horse)
         {
             if (ModelState.IsValid)
@@ -66,6 +71,7 @@ namespace ekipage.Controllers
         }
 
         // GET: Horse/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +92,7 @@ namespace ekipage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("HorseId,HorseName,HorseTemper,HorseDescription")] Horse horse)
         {
             if (id != horse.HorseId)
@@ -117,6 +124,7 @@ namespace ekipage.Controllers
         }
 
         // GET: Horse/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +145,7 @@ namespace ekipage.Controllers
         // POST: Horse/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var horse = await _context.Horse.FindAsync(id);
